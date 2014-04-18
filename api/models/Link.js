@@ -29,14 +29,6 @@ module.exports = {
             // maxLength: 20,
             // minLength: 5
         },
-        urlName: {
-            type: 'string',
-            defaultsTo: '',
-            required: true,
-            unique: true
-            // maxLength: 20,
-            // minLength: 5
-        },
         url: {
             type: 'json',
             defaultsTo: {},
