@@ -25,6 +25,6 @@
         "require": true,
         "console": true,
         "sails": true,
-        "Links": true
+        "Link": true
     }
 }
