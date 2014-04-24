@@ -1,0 +1,9 @@
+<% if(id !== 'default') { %>
+<div class="form-group has-feedback">
+    <label class="control-label col-sm-3"><%- i18n('url-' + id) %></label>
+    <div class="col-sm-9" name="url-<%- id %>" id="url-<%- id %>">
+        <input type="text" class="form-control" name="url-<%- id %>" id="url-<%- id %>" value="<%- value %>" placeholder="<%- i18n('link-platform-placeholder') %>">
+        <span class="js-platform-remove glyphicon glyphicon-remove form-control-feedback"></span>
+    </div>
+</div>
+<% } %>

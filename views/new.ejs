@@ -1,0 +1,56 @@
+<form class="form-horizontal container" role="form" action="/api/link" method="POST">
+    <%- partial('partial/template_name.ejs', { name: '' }) %>
+
+    <div class="form-group">
+        <label for="platform" class="col-sm-2 control-label"><%- i18n('link-platform')%></label>
+        <div class="col-sm-10">
+            <select class="form-control js-platform-select">
+                <option value="0"><%- i18n('link-platform-select') %></option>
+                <% for(var i = 0; i < platforms.length; i++) { %>
+                    <option value="<%- platforms[i] %>"><%- i18n(platforms[i]) %></option>
+                <% } %>
+            </select>
+        </div>
+    </div>
+    <%- partial('partial/template_platform_default.ejs', { value: '' }) %>
+
+    <input type="hidden" name="_csrf" value="<%= _csrf %>" />
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default"><%- i18n('new') %></button>
+        </div>
+    </div>
+</form>
+
+<script type="text/template" id="template-options">
+    <%- partial('partial/template_platform.ejs', { id: '', value: '' }) %>
+</script>
+
+<script>
+    var $select = $('.js-platform-select'),
+        _template = $('#template-options').html(),
+        $csrf = $('[name="_csrf"]'),
+        addOptions = function(n, v) {
+            if(v === '0') {
+                return;
+            }
+            var $template = $(_template);
+
+            $template.find('label').text(n);
+            $template.find('input').attr('id', v);
+            $template.find('input').attr('name', v);
+
+            if(!$('#' + v).length){
+                $template.insertBefore($csrf);
+
+                $template.find('.js-platform-remove').on('click', function(){
+                    $(this).parent().parent().remove();
+                });
+            }
+        };
+
+    $select.on('change', function(e) {
+        var $this = $(this);
+        addOptions( $this.find(':selected').text(), $this.val());
+    });
+</script>

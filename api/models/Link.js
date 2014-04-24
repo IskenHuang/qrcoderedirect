@@ -25,11 +25,12 @@ module.exports = {
         name: {
             type: 'string',
             defaultsTo: '',
+            unique: true,
             required: true,
             // maxLength: 20,
             // minLength: 5
         },
-        url: {
+        urls: {
             type: 'json',
             defaultsTo: {},
             required: true,
@@ -41,6 +42,63 @@ module.exports = {
     beforeValidation: function(link, cb) {
         sails.log.info('LinkModel beforeValidation link = ', link);
 
+        var _urls = {};
+
+        for(var i in link) {
+            if(i.indexOf('url-') >= 0) {
+                var _i = i.replace(/url\-/i, '');
+                _urls[_i] = link[i];
+
+                delete link[i];
+            }
+        }
+
+        link.urls = _urls;
+        sails.log.info('LinkModel beforeValidation link 2 = ', link);
+        cb(null, link);
+    },
+
+    beforeCreate: function(link, cb) {
+        sails.log.info('LinkModel beforeCreate link = ', link);
+
+        var _urls = {};
+
+        for(var i in link) {
+            if(i.indexOf('url-') >= 0) {
+                var _i = i.replace(/url\-/i, '');
+                _urls[_i] = link[i];
+
+                delete link[i];
+            }
+        }
+
+        link.urls = _urls;
+
+        delete link._csrf;
+
+        sails.log.info('LinkModel beforeCreate link 2 = ', link);
+        cb(null, link);
+    },
+
+    beforeUpdate: function(link, cb) {
+        sails.log.info('LinkModel beforeUpdate link = ', link);
+
+        var _urls = {};
+
+        for(var i in link) {
+            if(i.indexOf('url-') >= 0) {
+                var _i = i.replace(/url\-/i, '');
+                _urls[_i] = link[i];
+
+                delete link[i];
+            }
+        }
+
+        link.urls = _urls;
+
+        delete link._csrf;
+
+        sails.log.info('LinkModel beforeUpdate link 2 = ', link);
         cb(null, link);
     },
 };

@@ -30,6 +30,29 @@ module.exports.routes = {
         view: 'homepage'
     },
 
+    // new
+    'get /new': 'LinkController.new',
+    'get /create': 'LinkController.new',
+
+    // edit
+    'get /:id/edit': 'LinkController.edit',
+    'get /:id/update': 'LinkController.edit',
+    'get /link/:id/edit': 'LinkController.edit',
+    'get /link/:id/update': 'LinkController.edit',
+
+    // delete
+    'get /:id/delete': 'LinkController.remove',
+    'get /:id/remove': 'LinkController.remove',
+    'get /link/:id/delete': 'LinkController.remove',
+    'get /link/:id/remove': 'LinkController.remove',
+
+    // qrcode
+    'get /:id/q': 'LinkController.qrcode',
+    'get /:id/qr': 'LinkController.qrcode',
+    'get /:id/qrcode': 'LinkController.qrcode',
+
+    // get
+    'get /:id([^.\/?]+?)': 'LinkController.get',
 
     // Custom routes here...
 

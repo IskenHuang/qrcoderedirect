@@ -1,0 +1,13 @@
+<form class="form-horizontal container" role="form" actions="/api/link/<%- link.id %>" method="DELETE">
+    <div class="form-group">
+        <h4 for="name" class="col-md-offset-4 col-sm-4 control-label" style="text-align: left;"><%- i18n('remove-ask', link.name) %></h4>
+    </div>
+
+    <input type="hidden" name="_csrf" value="<%= _csrf %>" />
+    <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-4">
+            <button type="submit" value="submit" class="btn btn-danger"><%- i18n('remove') %></button>
+            <a class="btn" href="/<%- link.name %>/edit"><%- i18n('cancel') %></a>
+        </div>
+    </div>
+</form>
