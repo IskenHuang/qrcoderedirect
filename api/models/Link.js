@@ -74,6 +74,10 @@ module.exports = {
 
         link.urls = _urls;
 
+        if(link.name.match(/\W/ig)) {
+            link.name = encodeURIComponent(link.name);
+        }
+
         delete link._csrf;
 
         sails.log.info('LinkModel beforeCreate link 2 = ', link);
@@ -97,6 +101,10 @@ module.exports = {
         link.urls = _urls;
 
         delete link._csrf;
+
+        if(link.name.match(/\W/ig)) {
+            link.name = encodeURIComponent(link.name);
+        }
 
         sails.log.info('LinkModel beforeUpdate link 2 = ', link);
         cb(null, link);

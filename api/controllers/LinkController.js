@@ -24,6 +24,10 @@ module.exports = {
                 if(isMongoId) {
                     return Link.findOne(id);
                 }else{
+                    if(id.match(/\W/ig)){
+                        id = encodeURIComponent(id);
+                    }
+
                     return Link.findOne({ name: id});
                 }
             },
@@ -196,16 +200,17 @@ module.exports = {
                 if(isMongoId) {
                     return Link.findOne(id);
                 }else{
+                    if(id.match(/\W/ig)){
+                        id = encodeURIComponent(id);
+                    }
+
                     return Link.findOne({ name: id});
                 }
             };
 
         sails.log.debug('LinkController find _id = ', _id);
 
-        query(_id).done(function(err, link){
-            if(err) {
-                return res.json(err);
-            }
+        query(_id).then(function(link){
             sails.log.debug('LinkController find link = ', typeof(link), link);
 
             if(!link) {
@@ -223,11 +228,17 @@ module.exports = {
                 }
             }
 
+            if(link.name.match(/\%/)){
+                link.name = decodeURIComponent(link.name);
+            }
+
             return res.view('edit.ejs', {
                 layout: true,
                 link: link,
                 platforms: _platforms
             });
+        }).fail(function(err){
+            return res.json(err);
         });
     },
 
@@ -244,16 +255,17 @@ module.exports = {
                 if(isMongoId) {
                     return Link.findOne(id);
                 }else{
+                    if(id.match(/\W/ig)){
+                        id = encodeURIComponent(id);
+                    }
+
                     return Link.findOne({ name: id});
                 }
             };
 
         sails.log.debug('LinkController find _id = ', _id);
 
-        query(_id).done(function(err, link){
-            if(err) {
-                return res.json(err);
-            }
+        query(_id).then(function(link){
             sails.log.debug('LinkController find link = ', typeof(link), link);
 
             if(!link) {
@@ -262,10 +274,16 @@ module.exports = {
                 });
             }
 
+            if(link.name.match(/\%/)){
+                link.name = decodeURIComponent(link.name);
+            }
+
             return res.view('remove.ejs', {
                 layout: true,
                 link: link,
             });
+        }).fail(function(err) {
+            return res.json(err);
         });
     },
 
