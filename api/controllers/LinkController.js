@@ -20,6 +20,7 @@ module.exports = {
                 }
 
                 var isMongoId = (id.match(/^[0-9a-fA-F]{24}$/)) ? true : false;
+                sails.log.debug('isMongoId = ', isMongoId);
                 if(isMongoId) {
                     return Link.findOne(id);
                 }else{
