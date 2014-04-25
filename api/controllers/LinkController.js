@@ -130,9 +130,6 @@ module.exports = {
         uaParse(req.headers['user-agent']);
 
         query(_id).then(function(link){
-            // if(err) {
-            //     return res.json(err);
-            // }
             sails.log.debug('LinkController find link = ', typeof(link), link);
 
             if(!link) {
@@ -175,6 +172,8 @@ module.exports = {
             sails.log.debug('Final link = ', _link);
 
             return res.redirect(_link);
+        }).fail(function(err){
+            return res.json(err);
         });
     },
 
