@@ -40,8 +40,7 @@
             if(v === '0') {
                 return;
             }
-            console.log('n = ', n);
-            console.log('v = ', typeof(v), v);
+
             var $template = $(_template);
 
             $template.find('label').text(n);
@@ -87,6 +86,7 @@
             data: requestBody
         }).done(function(res){
             console.log('res = ', typeof(res), res);
+            window.location.href = '/' + res.name + '/edit';
         });
     });
 </script>

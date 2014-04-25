@@ -19,7 +19,7 @@ module.exports = function qrcode(options) {
         res = this.res;
 
     var defaults = {
-            url: req.baseUrl + req.originalUrl,
+            url: req.baseUrl + req._parsedUrl.pathname,
             type: 'png',
             level: 'M',
             size: 10,
@@ -76,6 +76,7 @@ module.exports = function qrcode(options) {
 
     // url
     options.url = options.url + '';
+    options.url = options.url.replace(/\/(q|qr|qrcode)$/i, '');
     options.url = (options.url.match(/^(http|https)\:\/\//i)) ? options.url : 'http://' + options.url;
 
     sails.log.debug('LinkController qrcode options = ', options);
