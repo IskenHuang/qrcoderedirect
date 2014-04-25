@@ -17,9 +17,9 @@ var QRCode = require('qr-image');
 module.exports = function qrcode(options) {
     var req = this.req,
         res = this.res;
-
+    sails.log.debug('url = ', req.baseUrl.replace(/\:\d*$/i, '') + req._parsedUrl.pathname);
     var defaults = {
-            url: req.baseUrl + req._parsedUrl.pathname,
+            url: req.baseUrl.replace(/\:\d*$/i, '') + req._parsedUrl.pathname,
             type: 'png',
             level: 'M',
             size: 10,
