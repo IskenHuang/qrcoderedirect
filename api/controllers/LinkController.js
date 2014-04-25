@@ -129,6 +129,7 @@ module.exports = {
 
         uaParse(req.headers['user-agent']);
 
+        console.log('query(_id) = ', query(_id));
         query(_id).done(function(err, link){
             if(err) {
                 return res.json(err);
