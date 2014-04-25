@@ -129,11 +129,10 @@ module.exports = {
 
         uaParse(req.headers['user-agent']);
 
-        console.log('query(_id) = ', query(_id));
-        query(_id).done(function(err, link){
-            if(err) {
-                return res.json(err);
-            }
+        query(_id).then(function(link){
+            // if(err) {
+            //     return res.json(err);
+            // }
             sails.log.debug('LinkController find link = ', typeof(link), link);
 
             if(!link) {
